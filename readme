@@ -1,0 +1,7 @@
+dynamic string allocator
+
+    it's the same idea as my string.h, with nearly NINETY PERCENT of the code
+    trimmed because of the simplicity of it.
+
+    it takes the old concept and removes the hard limit in place for
+    continuously allocating the string's memory
