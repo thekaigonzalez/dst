@@ -28,9 +28,12 @@ string1 (string *s)
 }
 
 // puts a string into the structure using string_append()
-void puts(string* s, const char* str) {
-  while (*str) {
-    string_append(s, *str);
-    str++;
-  }
+void
+puts (string *s, const char *str)
+{
+  while (*str)
+    {
+      string_append (s, *str);
+      str++;
+    }
 }
