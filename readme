@@ -5,3 +5,6 @@ dynamic string allocator
 
     it takes the old concept and removes the hard limit in place for
     continuously allocating the string's memory
+
+    and also adds a new function (puts), which allows you to put a string into
+    the data type without the need for multiple append_string calls
