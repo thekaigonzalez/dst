@@ -112,7 +112,32 @@ void str_list_init (string_list *s);
 // returns the size of the string list
 int str_list_size (string_list *s);
 
-// adds a string to the string list
+/**
+ * Add a string to a string_list structure.
+ *
+ * This function adds a string to a string_list structure. It copies the content
+ * of the provided string into the string_list and increments the size of the list.
+ * It's typically used to store a collection of strings in the string_list.
+ *
+ * @param s Pointer to the string_list structure where the string will be added.
+ * @param str Pointer to the string to be added to the string_list.
+ */
 void str_list_add (string_list *s, string *str);
+
+/**
+ * Compare two string objects for equality.
+ *
+ * This function compares two string objects and checks if they have the same
+ * content. It returns 1 if the strings are identical and 0 if they are not.
+ *
+ * @param s1 Pointer to the first string object.
+ * @param s2 Pointer to the second string object to compare.
+ *
+ * @return 1 if the strings are the same, 0 if they are different.
+ */
+int str_same (string *s1, string *s2);
+
+// return char at position
+char str_at (string *s, int pos);
 
 #endif
