@@ -43,6 +43,8 @@ explanations for each function.
 This string library is dynamic, so it is able to grow in size as
 well as shrink. This library is also very portable.
 
+> Compliant with most C standards, tested with TCC and GCC on Linux.
+
 ## dst - Lexical Analysis
 
 this string library also comes with a built in lexical analysis
