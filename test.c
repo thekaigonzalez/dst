@@ -1,16 +1,13 @@
 #include "string.h"
 
-#include <stdio.h>
+int main() {
+    string s;
+    string s2;
+    str_init(&s);
+    str_init(&s2);
 
-main ()
-{
-  string s;      // declare the string
-  str_init (&s); // initialize it
+    str_xmove(&s, "This is a sample sentence with a placeholder.");
+    str_xmove(&s2, "Thisa is a sample sentence with a placeholder.");
 
-  str_xmove (&s, "sTRINGS IN c HAVE NEVER BEEN this easy!"); // move a string into it
-
-  printf("[CURRENT]: %c\n", str_current(&s));
-  printf("[NEXT]: %c\n", str_pnext(&s));
-  str_next(&s);
-  printf("[CURRENT]: %c\n", str_current(&s));
+    printf("%i\n", str_same(&s, &s2));
 }
