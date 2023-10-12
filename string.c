@@ -50,7 +50,6 @@ str_xmove (string *s, const char *str)
 void
 str_xmove_replace (string *s, const char *str)
 {
-  str_free (s);
   str_init (s);
 
   str_xmove (s, str);
