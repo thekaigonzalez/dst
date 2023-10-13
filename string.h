@@ -5,7 +5,7 @@
 
 typedef struct string
 {
-  char *_p;       // inner string
+  char *ptr;      // inner string
   int __position; // the position of the string
 
   int __index; // the index of the current character
@@ -20,19 +20,29 @@ typedef struct string_list
   int _size;
 } string_list;
 
+#define STRING(name)                                                          \
+  string name;                                                                \
+  str_init (&name);
+
+#define ERROR(msg) fprintf (stderr, "%s\n", msg);
+
+// a string that uses cleanup to automatically be freed
+#define gc_string string __attribute__((cleanup(str_void_ptr_gc)))
+#define gc_strptr gc_string *
+
 // add a character to the string
-void str_app (string *s, char z);
+void str_append_last (string *s, char z);
 
 /// @brief initializes the string
-/// @param s 
+/// @param s
 void str_init (string *s);
 
 // adds *str into the string (can also be used as a concatenate feature if
-// string isn't cleared, to clear them use str_xmove_replace())
-void str_xmove (string *s, const char *str);
+// string isn't cleared, to clear them use str_assign_literal_replace())
+void str_assign_literal (string *s, const char *str);
 
 // adds *str into the string, replacing the current string
-void str_xmove_replace (string *s, const char *str);
+void str_assign_literal_replace (string *s, const char *str);
 
 // frees the string
 void str_free (string *s);
@@ -64,7 +74,8 @@ int str_index (string *s);
 // moves to the next character
 void str_next (string *s);
 
-// checks the next and previous characters, also updating the current character
+// checks the next and previous characters, also updating the current
+// character
 void str_where (string *s);
 
 // checks if the index exists in the string
@@ -97,7 +108,8 @@ void str_uppercase (string *s);
 // will convert the string to lowercase
 void str_lowercase (string *s);
 
-// switches the case of the string (turns lower case to upper case and vice versa)
+// switches the case of the string (turns lower case to upper case and vice
+// versa)
 void str_switch_case (string *s);
 
 // splits the string into an array of strings
@@ -115,11 +127,13 @@ int str_list_size (string_list *s);
 /**
  * Add a string to a string_list structure.
  *
- * This function adds a string to a string_list structure. It copies the content
- * of the provided string into the string_list and increments the size of the list.
- * It's typically used to store a collection of strings in the string_list.
+ * This function adds a string to a string_list structure. It copies the
+ * content of the provided string into the string_list and increments the
+ * size of the list. It's typically used to store a collection of strings in
+ * the string_list.
  *
- * @param s Pointer to the string_list structure where the string will be added.
+ * @param s Pointer to the string_list structure where the string will be
+ * added.
  * @param str Pointer to the string to be added to the string_list.
  */
 void str_list_add (string_list *s, string *str);
@@ -140,4 +154,57 @@ int str_same (string *s1, string *s2);
 // return char at position
 char str_at (string *s, int pos);
 
+// adds n to the position
+void str_pos_move (string *s, int n);
+
+// checks if the string is null
+int str_null (string *s);
+
+// returns the string at the index
+string *str_list_get_at (string_list *s, int index);
+
+// frees all the strings in a list
+void str_list_free (string_list *s);
+
+// removes a string at the index
+void str_list_remove (string_list *s, int index);
+
+// completely and utterly deletes a string; this is NOT str_empty, this function
+// turns the string NULL meaning it takes up no bytes AT ALL while str_empty
+// turns everything in the function to either 0 or an empty byte, simply
+// restarting the string itself
+void str_void (string *s);
+
+// impostor will create a string that is the exact same as the string you pass in
+string str_impostor (string *s);
+
+// replaces every instance of a character in a string with another character
+void str_replace (string *s, char old, char new);
+
+// replaces every instance of a string in a string with another string
+void str_replace_long (string *s, string *old, string *new);
+
+// creates a basic new string allocated immediately for use
+string *str_distinct (const char *str);
+
+// frees a string object created by str_distinct
+void str_void_ptr (string *s);
+
+// frees a gc string pointer created by str_distinct
+void str_void_ptr_gc (string *s);
+
+// allows a gc string to be initialized
+gc_string str_gc_empty (void);
+
+// extracts a substring from a string
+string *str_substr (string *s, int start, int end);
+
+// turns escaped escapes into escapes
+void str_escape (string *s);
+
+// turns escapes into escaped escapes
+void str_unescape (string *s);
+
+// swaps character at index for another
+void str_swap (string *s, int i, char j);
 #endif
