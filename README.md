@@ -4,24 +4,23 @@
 
 ```c
 #include "string.h"
+STRING (sample);
+str_assign_literal (&sample, "hello world");
 
-main ()
-{
-  string s;      // declare the string
-  str_init (&s); // initialize it
+string_list list = str_split (&sample, ' ');
 
-  str_xmove (&s, "sTRINGS IN c HAVE NEVER BEEN this easy!"); // move a string into it
+assert (str_list_size (&list) == 2);
 
-  str_switch_case (&s); // switch the Uppercases to lowercases and vice versa
+string *member1 = str_distinct ("hello");
+string *member2 = str_distinct ("world");
 
-  str_print (&s); // print the string
+assert (str_equal (str_list_get_at (&list, 0), member1));
+assert (str_equal (str_list_get_at (&list, 1), member2));
 
-  str_free (&s); // remove it
-}
-```
-
-```txt
-Strings in C have never been THIS EASY!
+str_void (&sample);
+str_void_ptr (member1);
+str_void_ptr (member2);
+str_list_free (&list);
 ```
 
 this is the new, modern, and cleanest string library for c in the world. *(not
