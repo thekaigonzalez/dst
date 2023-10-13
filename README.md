@@ -32,6 +32,9 @@ features such as:
 * string functions
 * string lists
 * string stripping
+* substrings
+* replacing characters
+* replacing substrings
 * and string splitting
 
 each function works off of another, so it is
